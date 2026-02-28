@@ -5,7 +5,6 @@ public class MainTudoEmUm {
 
     private static List<String> livros = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
-    private static int totalEmprestimos = 0;
 
     public static void main(String[] args) {
         System.out.println("=== BIBLIOTECA ORGANIZADA ===");
@@ -21,7 +20,8 @@ public class MainTudoEmUm {
                 case 1: adicionarLivro(); break;
                 case 2: emprestarLivro(); break;
                 case 3: listarLivros(); break;
-                case 4: rodando = false; break;
+                case 4: rodando = false;break;
+                default: System.out.println("Input digitado Inválido!"); //executa apenas se op for 1,2,3 ou 4
             }
         }
     }
@@ -53,44 +53,47 @@ public class MainTudoEmUm {
     }
 
 
-    private static int totalEmprestimosGeral = 0;
-
+    /**
+     * Correções incluidas:
+     * Validação de Lista vazia, emitindo msg de erro ao usuario
+     * Lógica do for que percorre a List, para encontrar corretamente os Livros
+     * @version: 2.0
+     * @author: João Szczypior
+     */
     private static void emprestarLivro() {
-        System.out.print("Título para empréstimo: ");
-        String tituloEmprestimo = sc.nextLine().toLowerCase();
-        boolean encontrado = false;
-
-        if (livros.isEmpty()) {
-            System.out.println("A biblioteca está vazia! Não há o que emprestar.");
+        if(livros.isEmpty()){ //verificação Lista de Livros vazia
+            System.out.println("A lista de Livros está vazia, não há o que emprestar!");
             return;
         }
-
-        for (int i = 0; i < livros.size(); i++) {
-            if (livros.get(i).toLowerCase().contains(tituloEmprestimo)) {
-
-                //Remoção do Livro encontrado
-                String livroRemovido = livros.remove(i);
-
-                //Contador de empréstimos (global)
-                totalEmprestimosGeral++;
-
-                System.out.println("Empréstimo realizado com sucesso: " + livroRemovido);
-                System.out.println("Total de empréstimos feitos até agora: " + totalEmprestimosGeral);
-                System.out.println("Livros restantes no acervo: " + livros.size());
-
-                encontrado = true;
+        System.out.println("Título para empréstimo: ");
+        String inputEmprestimo = sc.nextLine();
+        int totalEmprestimos = 0;
+        for(int i = 0; i < livros.size(); i++){
+            if(livros.get(i).equalsIgnoreCase(inputEmprestimo)){
+                String livroEmprestimo = livros.remove(i);  //remove o livro encontado da lista, pois foi emprestado
+                totalEmprestimos++; //adiciona +1 no total dos emprestimos
+                System.out.println("Empréstimo do Livro: " + inputEmprestimo + " Realizado com sucesso!");
+                System.out.println("Total de Empréstimos feitos até agora: " + totalEmprestimos);
+                System.out.println("Livros restantes no Acervo: " + livros.size());
                 break;
-            }
-
-            //Validador caso livro nao seja encontrado
-            if (!encontrado) {
-                System.out.println("Livro não encontrado no!");
+            } else {
+                System.out.println("Livro: " + inputEmprestimo + " Não encontrado no acervo!");
+                break;
             }
         }
     }
 
+    /**
+     * Correções de validação caso a lista for vazia emitir mensagem de erro ao usuário
+     * @author: João szczypior
+     */
     private static void listarLivros() {
-        for (String l : livros) System.out.println(l);
+        if(livros.isEmpty()){  //Validação caso a lista esteja vazia
+            System.out.println("A lista De livros Está vazia!");
+        } else {
+            for (String l : livros) System.out.println(l);
+        }
+
     }
 
 
