@@ -2,23 +2,38 @@ import java.util.*;
 import java.io.*;
 
 public class MainTudoEmUm {
-    private static List<String> livros = new ArrayList<>(); // Persistencia em memoria
+
+    private static List<String> livros = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
     private static int totalEmprestimos = 0;
 
     public static void main(String[] args) {
-        System.out.println("=== BIBLIOTECA BAGUNCADA ===");
-        carregarLivros(); // Persistencia misturada
+        System.out.println("=== BIBLIOTECA ORGANIZADA ===");
 
-        while (true) {
-            // Entrada misturada com UI
+        // Loop para o menu não fechar sozinho
+        boolean rodando = true;
+        while (rodando) {
             System.out.println("\n1-Adicionar 2-Emprestar 3-Listar 4-Sair");
-            int op = sc.nextInt(); sc.nextLine();
+            int op = sc.nextInt();
+            sc.nextLine(); // Limpa o buffer
 
-            if (op == 1) {
-                // Entrada + Validacao misturada
-                System.out.print("Titulo: ");
-                String titulo = sc.nextLine();
+            switch (op) {
+                case 1: adicionarLivro(); break;
+                case 2: emprestarLivro(); break;
+                case 3: listarLivros(); break;
+                case 4: rodando = false; break;
+            }
+        }
+    }
+
+
+    private static void adicionarLivro() {
+        while (true){
+
+
+            System.out.print("Titulo: ");
+            String titulo = sc.nextLine();
+            {
                 if (titulo.length() < 3) { // Validacao inline
                     System.out.println("ERRO: Titulo curto!");
                     continue;
@@ -30,38 +45,54 @@ public class MainTudoEmUm {
                     livros.add(titulo);
                     salvarLivros(); // Salva arquivo toda vez!
                     System.out.println("Adicionado!");
+                    break;
                 }
-            } else if (op == 2) {
-                // Emprestimo com regra misturada
-                System.out.print("Titulo para emprestimo: ");
-                String tituloEmprestimo = sc.nextLine().toLowerCase();
-                boolean encontrado = false;
-                for (int i = 0; i < livros.size(); i++) {
-                    if (livros.get(i).toLowerCase().contains(tituloEmprestimo)) {
-                        totalEmprestimos++;
-                        System.out.println("Emprestado! Total: " + totalEmprestimos);
-                        encontrado = true;
-                        // Saida misturada com logica
-                        System.out.println("Livros disponiveis: " + (livros.size() - totalEmprestimos));
-                        break;
-                    }
-                }
-                if (!encontrado) System.out.println("Livro nao encontrado!");
-            } else if (op == 3) {
-                // Listagem com formatacao inline
-                System.out.println("Livros (" + livros.size() + "):");
-                for (String l : livros) {
-                    System.out.println("- " + l);
-                }
-            } else if (op == 4) {
-                salvarLivros();
-                System.out.println("Saindo...");
+            }
+        }
+
+    }
+
+
+    private static int totalEmprestimosGeral = 0;
+
+    private static void emprestarLivro() {
+        System.out.print("Título para empréstimo: ");
+        String tituloEmprestimo = sc.nextLine().toLowerCase();
+        boolean encontrado = false;
+
+        if (livros.isEmpty()) {
+            System.out.println("A biblioteca está vazia! Não há o que emprestar.");
+            return;
+        }
+
+        for (int i = 0; i < livros.size(); i++) {
+            if (livros.get(i).toLowerCase().contains(tituloEmprestimo)) {
+
+                //Remoção do Livro encontrado
+                String livroRemovido = livros.remove(i);
+
+                //Contador de empréstimos (global)
+                totalEmprestimosGeral++;
+
+                System.out.println("Empréstimo realizado com sucesso: " + livroRemovido);
+                System.out.println("Total de empréstimos feitos até agora: " + totalEmprestimosGeral);
+                System.out.println("Livros restantes no acervo: " + livros.size());
+
+                encontrado = true;
                 break;
-            } else {
-                System.out.println("Opcao invalida!");
+            }
+
+            //Validador caso livro nao seja encontrado
+            if (!encontrado) {
+                System.out.println("Livro não encontrado no!");
             }
         }
     }
+
+    private static void listarLivros() {
+        for (String l : livros) System.out.println(l);
+    }
+
 
     private static void carregarLivros() {
         try {
@@ -77,6 +108,7 @@ public class MainTudoEmUm {
             System.out.println("Erro carregando: " + e.getMessage());
         }
     }
+
 
     private static void salvarLivros() {
         try {
