@@ -8,10 +8,10 @@ public class MainTudoEmUm {
 
     public static void main(String[] args) {
         System.out.println("=== BIBLIOTECA ORGANIZADA ===");
-
+        carregarLivros();
         // Loop para o menu não fechar sozinho
         boolean rodando = true;
-        while (rodando) {
+        do{
             System.out.println("\n1-Adicionar 2-Emprestar 3-Listar 4-Sair");
             int op = sc.nextInt();
             sc.nextLine(); // Limpa o buffer
@@ -23,7 +23,8 @@ public class MainTudoEmUm {
                 case 4: rodando = false;break;
                 default: System.out.println("Input digitado Inválido!"); //executa apenas se op for 1,2,3 ou 4
             }
-        }
+        } while (rodando);
+            
     }
 
 
@@ -96,32 +97,59 @@ public class MainTudoEmUm {
 
     }
 
+    /**
+     * Verifica se a lista está vazia
+     * @author: Andrey Marucci
+     * @return retorna verdadeiro se a lista está vazia
+     */
+    private static boolean estaVazia(){
+        return livros.isEmpty();
+    }
 
+    /**
+     * Correções: Ajustei o nome das variáveis para ficar mais legível, alterei a mensagem de erro porque estava confusa, 
+     * inclui um try dentro do if para garantir que o leitor seja fechado mesmo se acontecesse algum erro dentro do while
+     * e verifico se não há linhas vazias dentro do txt, o que faz com que evite de ler uma quebra de linha como um livro
+     * @author: Andrey Marucci
+     */
     private static void carregarLivros() {
         try {
-            File f = new File("livros.txt");
-            if (f.exists()) {
-                Scanner fileSc = new Scanner(f);
-                while (fileSc.hasNextLine()) {
-                    livros.add(fileSc.nextLine());
+
+            File arquivoTxt = new File("livros.txt");
+
+            if (arquivoTxt.exists()) {
+
+                try(Scanner fileSc = new Scanner(arquivoTxt)){
+                    
+                    while (fileSc.hasNextLine()) {
+                        String livro = fileSc.nextLine().trim();
+                        if(!livro.isEmpty()){
+                            livros.add(livro);
+                        }
+                    }
                 }
-                fileSc.close();
             }
-        } catch (Exception e) {
-            System.out.println("Erro carregando: " + e.getMessage());
+        } catch (Exception e){
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 
-
+    /**
+     * Correções: Ajustei o nome das variáveis para ficar mais legível, alterei a mensagem de erro porque ela não informava o erro
+     * e cololquei um try para garantir que o PrintWriter seja fechado.
+     * @author: Andrey Marucci
+     */
     private static void salvarLivros() {
         try {
-            PrintWriter pw = new PrintWriter("livros.txt");
-            for (String l : livros) {
-                pw.println(l);
+            //Instanciando um escritor de arquivos e atribuindo "livros.txt" como alvo de escrita
+            try(PrintWriter escritor = new PrintWriter("livros.txt");){
+                for (String livro : livros) {
+                escritor.println(livro);
+                }
             }
-            pw.close();
+            
         } catch (Exception e) {
-            System.out.println("Erro salvando!");
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 }
