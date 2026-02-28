@@ -107,8 +107,9 @@ public class MainTudoEmUm {
     }
 
     /**
-     * Correções: Ajustei o nome das variáveis para ficar mais legível, alterei a mensagem de erro porque estava confusa 
-     * e inclui um try dentro do if para garantir que o leitor seja fechado mesmo se acontecesse algum erro dentro do while
+     * Correções: Ajustei o nome das variáveis para ficar mais legível, alterei a mensagem de erro porque estava confusa, 
+     * inclui um try dentro do if para garantir que o leitor seja fechado mesmo se acontecesse algum erro dentro do while
+     * e verifico se não há linhas vazias dentro do txt, o que faz com que evite de ler uma quebra de linha como um livro
      * @author: Andrey Marucci
      */
     private static void carregarLivros() {
@@ -121,9 +122,10 @@ public class MainTudoEmUm {
                 try(Scanner fileSc = new Scanner(arquivoTxt)){
                     
                     while (fileSc.hasNextLine()) {
-
-                        livros.add(fileSc.nextLine());
-
+                        String livro = fileSc.nextLine().trim();
+                        if(!livro.isEmpty()){
+                            livros.add(livro);
+                        }
                     }
                 }
             }
