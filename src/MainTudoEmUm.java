@@ -6,6 +6,7 @@ public class MainTudoEmUm {
     private static List<String> livros = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
 
+    /* TEMOS QUE AJUSTAR A MAIN PARA COMPORTAR O COMPORTAMENTO DAS CLASSES
     public static void main(String[] args) {
         System.out.println("=== BIBLIOTECA ORGANIZADA ===");
         carregarLivros();

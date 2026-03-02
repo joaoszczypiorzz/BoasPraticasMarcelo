@@ -8,6 +8,10 @@ public class Livro {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
+    //Constructor da Classe:
+    public Livro(String titulo){
+        this.titulo = titulo;
+    }
 
     //ToString para facilitar a exibição
     @Override
