@@ -1,3 +1,4 @@
+package Acervo;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -9,16 +10,24 @@ public class Biblioteca {
     private List<Livro> acervo;
     private static final String ARQUIVO_lIVROS = "livros.txt"; //Final são para Variavéis que não mudam
 
-    public int getTotalEmprestimos() {
+    /**
+     * Construtor chama o método carregar livro para que já comece com a lista asssim que instanciado
+     * @author: Andrey Marucci
+     */
+    public Biblioteca(){
+        acervo = new ArrayList<>();
+        carregarLivros();
+    }
+    private int getTotalEmprestimos() {
         return totalEmprestimos;
     }
-    public void setTotalEmprestimos(int totalEmprestimos) {
+    private void setTotalEmprestimos(int totalEmprestimos) {
         this.totalEmprestimos = totalEmprestimos;
     }
-    public List<Livro> getAcervo() {
+    private List<Livro> getAcervo() {
         return acervo;
     }
-    public void setAcervo(List<Livro> acervo) {
+    private void setAcervo(List<Livro> acervo) {
         this.acervo = acervo;
     }
 
@@ -43,7 +52,7 @@ public class Biblioteca {
     /**
      * Função para emprestar livros
      * @param tituloProcurado input do usuário
-     * @return true caso o livro não exista na lista e a lista não esteja vazia, e false se não achar o Livro
+     * @return true caso o livro não exista na lista e a lista não esteja vazia, e false se não achar o Acervo.Livro
      * @throws IllegalStateException caso a lista estiver vazia
      * @author João Szczypior
      * @version: 1.0
@@ -59,7 +68,7 @@ public class Biblioteca {
             return true;
         }
 
-        return false; //não achou o Livro
+        return false; //não achou o Acervo.Livro
 
     }
 
@@ -71,12 +80,13 @@ public class Biblioteca {
      * @version: 1.0
      * @author: João Szczypior
      */
-    public boolean verificaExiste(String inputTitulo){
+    private boolean verificaExiste(String inputTitulo){
+
         for (Livro l : acervo) {
             if(l.getTitulo().equalsIgnoreCase(inputTitulo))
-                return true; //Livro já existe na lista
+                return true; //Acervo.Livro já existe na lista
         }
-        return false; //Livro não existe na Lista
+        return false; //Acervo.Livro não existe na Lista
     }
 
     /**
@@ -116,6 +126,12 @@ public class Biblioteca {
             }
         } catch (Exception e) {
             System.out.println("Erro carregando acervo: " + e.getMessage());
+        }
+    }
+
+    public void exibir(){
+        for(Livro livro : acervo){
+            System.out.println(livro);
         }
     }
 
