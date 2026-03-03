@@ -75,7 +75,7 @@ public class Livro {
 
     /**
      * Função para exibir atributos referentes ao objeto Livro.
-     * @author: João Vitor Novaes
+     * @author João Vitor Novaes
      * @return
      */
 
