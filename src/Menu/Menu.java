@@ -57,11 +57,11 @@ public class Menu {
         String titulo = scanner.nextLine();
 
         try {
-            // Tenta adicionar. Se der erro na regra de negócio, cai no catch.
+            
             biblioteca.adicionarLivro(titulo);
             System.out.println("SUCESSO: Livro '" + titulo + "' adicionado ao acervo.");
         } catch (IllegalArgumentException | InputMismatchException e) {
-            // Captura as exceções que você configurou na Acervo.Biblioteca
+            
             System.out.println(e.getMessage());
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
@@ -83,7 +83,6 @@ public class Menu {
                 System.out.println("Livro não encontrado no acervo.");
             }
         } catch (IllegalStateException e) {
-            // Captura erro de lista vazia
             System.out.println("Erro: " + e.getMessage());
         }
     }
