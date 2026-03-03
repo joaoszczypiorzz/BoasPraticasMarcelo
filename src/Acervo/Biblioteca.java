@@ -65,6 +65,7 @@ public class Biblioteca {
         if(tituloAchado){
             totalEmprestimos++;
             salvarLivros(); //Atualiza o arquivo
+            System.out.println("Total de empréstimos: " + totalEmprestimos);
             return true;
         }
 
