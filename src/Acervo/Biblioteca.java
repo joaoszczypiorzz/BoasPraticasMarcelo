@@ -3,30 +3,39 @@ package Acervo;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.*;
-import java.util.List;
 
+/**
+ * Gerencia o acervo de livros possibilitando adição,
+ * emprestimo e exibição 
+ */
 public class Biblioteca {
     private int totalEmprestimos;
     private List<Livro> acervo;
-    private static final String ARQUIVO_lIVROS = "livros.txt"; //Final são para Variavéis que não mudam
+
+    /** Nome do Arquivo criado,é utilizado Final pois é imutavel */
+    private static final String ARQUIVO_lIVROS = "livros.txt";
 
     /**
-     * Construtor chama o método carregar livro para que já comece com a lista asssim que instanciado
+     * Construtor chama o método carregar livro para que já comece com a lista assim que instanciado
      * @author: Andrey Marucci
      */
     public Biblioteca(){
         acervo = new ArrayList<>();
         carregarLivros();
     }
+
     private int getTotalEmprestimos() {
         return totalEmprestimos;
     }
+
     private void setTotalEmprestimos(int totalEmprestimos) {
         this.totalEmprestimos = totalEmprestimos;
     }
+
     private List<Livro> getAcervo() {
         return acervo;
     }
+
     private void setAcervo(List<Livro> acervo) {
         this.acervo = acervo;
     }
@@ -35,32 +44,35 @@ public class Biblioteca {
      * Função para adicionar os Livros na lista
      * @param titulo Input do usuário
      * @return true quando adicionado, e false quando algumas das exceções forem lançadas
-     * @throws IllegalArgumentException Caso titulo informado pelo usuário for menor que 3 caracteres
+     * @throws IllegalArgumentException Caso titulo informado pelo usuário for menor que 3 caracteres ou nulo
      * @throws InputMismatchException Caso titulo informado já existir na Lista
      */
     public boolean adicionarLivro(String titulo) {
         if(titulo == null || titulo.length() < 3){
-            throw new IllegalArgumentException("ERRO: Titulo informado é muito curto!");
+            throw new IllegalArgumentException("Titulo informado é muito curto!");
         } else if (verificaExiste(titulo) == true){
-            throw new InputMismatchException("ERRO: Titulo informado já existe no Acervo!");
+            throw new InputMismatchException("Titulo informado já existe no Acervo!");
         }
+
         acervo.add(new Livro(titulo));
         salvarLivros();
         return true;
     }
 
     /**
-     * Função para emprestar livros
+     * Empresta livros, os removendo do acervo
      * @param tituloProcurado input do usuário
-     * @return true caso o livro não exista na lista e a lista não esteja vazia, e false se não achar o Acervo.Livro
+     * @return true caso o livro exista na lista e a lista não esteja vazia, false se não achar o Acervo.Livro
      * @throws IllegalStateException caso a lista estiver vazia
      * @author João Szczypior
      * @version: 1.0
      */
     public boolean emprestarLivro(String tituloProcurado){
         if(listaVazia()){
-            throw new IllegalStateException("Lista está vazia não há o que emprestar");
+            throw new IllegalStateException("Lista está vazia, não há o que emprestar");
         }
+
+        /** Compara os Livros contidos no acervo com o tituloProcurado, ignorando maiusculos e minusculos */
         boolean tituloAchado =  acervo.removeIf(l -> l.getTitulo().equalsIgnoreCase(tituloProcurado));
         if(tituloAchado){
             totalEmprestimos++;
@@ -74,7 +86,7 @@ public class Biblioteca {
     }
 
     /**
-     * Função que verifica se o titulo informado pelo usuário existe na lista
+     * Verifica se o titulo informado pelo usuário existe na lista,
      * retornando true se encontrar e false se não encontrar
      * @param inputTitulo input de titulo informado pelo usuário
      * @return true se encontrar e false se não encontrar
@@ -91,8 +103,7 @@ public class Biblioteca {
     }
 
     /**
-     * Correções: Ajustei o nome das variáveis para ficar mais legível, alterei a mensagem de erro porque ela não informava o erro
-     * e cololquei um try para garantir que o PrintWriter seja fechado.
+     * Garante que o ARQUIVO_lIVROS tenha seu estado mantido no livros.txt
      * @author: Andrey Marucci
      */
     private void salvarLivros(){
@@ -110,9 +121,7 @@ public class Biblioteca {
     }
 
     /**
-     * Correções: Ajustei o nome das variáveis para ficar mais legível, alterei a mensagem de erro porque estava confusa,
-     * inclui um try dentro do if para garantir que o leitor seja fechado mesmo se acontecesse algum erro dentro do while
-     * e verifico se não há linhas vazias dentro do txt, o que faz com que evite de ler uma quebra de linha como um livro
+     * Le os títulos do arquivo os carregando na lista
      * @author: Andrey Marucci
      */
     private void carregarLivros() {
@@ -130,15 +139,23 @@ public class Biblioteca {
         }
     }
 
+    /**
+     * Demonstra todos os livros contidos no terminal
+     */
     public void exibir(){
         for(Livro livro : acervo){
             System.out.println(livro);
         }
     }
 
+    /**
+     * Verifica se a lista esta vazia, retornando false se não
+     * @throws illegalStateException caso a lista esta vazia
+     * @return false se a lista não estiver vazia
+     */
     public boolean listaVazia (){
         if(acervo.isEmpty()){
-            throw new IllegalStateException("Lista Está vazia não há o que emprestar!");
+            throw new IllegalStateException("Lista Está vazia, não há o que emprestar!");
         }
         return false;
     }
