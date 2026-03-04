@@ -131,8 +131,12 @@ public class Biblioteca {
     }
 
     public void exibir(){
-        for(Livro livro : acervo){
-            System.out.println(livro);
+        if(acervo.isEmpty()){
+            System.out.println("O acervo está vazio !");
+        } else {
+            for(Livro livro : acervo){
+                System.out.println(livro);
+            }
         }
     }
 
