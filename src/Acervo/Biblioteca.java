@@ -58,8 +58,8 @@ public class Biblioteca {
      * @version: 1.0
      */
     public boolean emprestarLivro(String tituloProcurado){
-        if(acervo.isEmpty()){
-            throw new IllegalStateException("Erro: Lista está vazia não há o que emprestar");
+        if(listaVazia()){
+            throw new IllegalStateException("Lista está vazia não há o que emprestar");
         }
         boolean tituloAchado =  acervo.removeIf(l -> l.getTitulo().equalsIgnoreCase(tituloProcurado));
         if(tituloAchado){
@@ -134,6 +134,13 @@ public class Biblioteca {
         for(Livro livro : acervo){
             System.out.println(livro);
         }
+    }
+
+    public boolean listaVazia (){
+        if(acervo.isEmpty()){
+            throw new IllegalStateException("Lista Está vazia não há o que emprestar!");
+        }
+        return false;
     }
 
 }

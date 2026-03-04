@@ -8,7 +8,7 @@ import java.util.InputMismatchException;
 /**
  * Classe utilitária, contém as saídas de dados para o usuário e o Scanner, recebe a biblioteca e passa os valores para ela
  */
-public class Menu {
+public class Menu  {
 
     private Biblioteca biblioteca;
     private Scanner scanner;
@@ -72,17 +72,20 @@ public class Menu {
      * Utiliza o método emprestar da biblioteca
      */
     private void menuEmprestar() {
-        System.out.print("Digite o título do livro que deseja emprestar: ");
-        String titulo = scanner.nextLine();
 
-        try {
-            boolean emprestou = biblioteca.emprestarLivro(titulo);
-            if (emprestou) {
-                System.out.println("Você emprestou o livro '" + titulo + "'.");
-            } else {
-                System.out.println("Livro não encontrado no acervo.");
+        try{
+            boolean listaVazia = biblioteca.listaVazia();
+            if(!listaVazia){ //verificação de Lista vazia
+                System.out.print("Digite o título do livro que deseja emprestar: ");
+                String titulo = scanner.nextLine();
+                boolean emprestou = biblioteca.emprestarLivro(titulo);
+                if (emprestou) {
+                    System.out.println("Você emprestou o livro '" + titulo + "'.");
+                } else {
+                    System.out.println("ERRO: Livro '" + titulo + "' não foi encontrado no acervo.");
+                }
             }
-        } catch (IllegalStateException e) {
+        }catch (IllegalStateException e){
             System.out.println("Erro: " + e.getMessage());
         }
     }
