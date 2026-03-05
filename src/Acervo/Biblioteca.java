@@ -5,53 +5,38 @@ import java.io.PrintWriter;
 import java.util.*;
 
 /**
- * Gerencia o acervo de livros possibilitando adição,
- * emprestimo e exibição 
+ * Gerencia o acervo de livros da aplicação, possibilitando a adição de novos títulos,
+ * controle de empréstimos e persistência de dados em arquivo de texto.
+ * @author Andrey Marucci, João Szczypior
  */
 public class Biblioteca {
     private int totalEmprestimos;
     private List<Livro> acervo;
 
-    /** Nome do Arquivo criado,é utilizado Final pois é imutavel */
-    private static final String ARQUIVO_lIVROS = "livros.txt";
+    /** Nome do arquivo onde o acervo será salvo e lido. */
+    private static final String ARQUIVO_LIVROS = "livros.txt";
 
     /**
-     * Construtor chama o método carregar livro para que já comece com a lista assim que instanciado
-     * @author: Andrey Marucci
+     * Construtor da Biblioteca.
+     * Inicializa a lista do acervo e carrega automaticamente os livros salvos no arquivo físico.
      */
-    public Biblioteca(){
+    public Biblioteca() {
         acervo = new ArrayList<>();
         carregarLivros();
     }
 
-    private int getTotalEmprestimos() {
-        return totalEmprestimos;
-    }
-
-    private void setTotalEmprestimos(int totalEmprestimos) {
-        this.totalEmprestimos = totalEmprestimos;
-    }
-
-    private List<Livro> getAcervo() {
-        return acervo;
-    }
-
-    private void setAcervo(List<Livro> acervo) {
-        this.acervo = acervo;
-    }
-
     /**
-     * Função para adicionar os Livros na lista
-     * @param titulo Input do usuário
-     * @return true quando adicionado, e false quando algumas das exceções forem lançadas
-     * @throws IllegalArgumentException Caso titulo informado pelo usuário for menor que 3 caracteres ou nulo
-     * @throws InputMismatchException Caso titulo informado já existir na Lista
+     * Adiciona um novo livro à lista do acervo e atualiza o arquivo físico.
+     * * @param titulo O nome do livro inserido pelo usuário.
+     * @return true se o livro for adicionado com sucesso.
+     * @throws IllegalArgumentException Se o título informado for nulo ou possuir menos de 3 caracteres.
+     * @throws InputMismatchException   Se o título informado já existir no acervo atual.
      */
     public boolean adicionarLivro(String titulo) {
-        if(titulo == null || titulo.length() < 3){
-            throw new IllegalArgumentException("Titulo informado é muito curto!");
-        } else if (verificaExiste(titulo) == true){
-            throw new InputMismatchException("Titulo informado já existe no Acervo!");
+        if (titulo == null || titulo.length() < 3) {
+            throw new IllegalArgumentException("Erro: Titulo informado é muito curto!");
+        } else if (verificaExiste(titulo)) {
+            throw new InputMismatchException("Erro: Titulo informado já existe no Acervo!");
         }
 
         acervo.add(new Livro(titulo));
@@ -60,73 +45,62 @@ public class Biblioteca {
     }
 
     /**
-     * Empresta livros, os removendo do acervo
-     * @param tituloProcurado input do usuário
-     * @return true caso o livro exista na lista e a lista não esteja vazia, false se não achar o Acervo.Livro
-     * @throws IllegalStateException caso a lista estiver vazia
-     * @author João Szczypior
-     * @version: 1.0
+     * Empresta um livro, removendo-o temporariamente do acervo.
+     * * @param tituloProcurado O título do livro a ser buscado no acervo.
+     * @return true se o livro for encontrado e removido; false caso contrário.
+     * @throws IllegalStateException se a lista do acervo estiver vazia antes da busca.
      */
-    public boolean emprestarLivro(String tituloProcurado){
-        if(listaVazia()){
-            throw new IllegalStateException("Lista está vazia, não há o que emprestar");
+    public boolean emprestarLivro(String tituloProcurado) {
+        if (listaVazia()) {
+            throw new IllegalStateException("Lista está vazia, não há o que emprestar.");
         }
 
-        /** Compara os Livros contidos no acervo com o tituloProcurado, ignorando maiusculos e minusculos */
-        boolean tituloAchado =  acervo.removeIf(l -> l.getTitulo().equalsIgnoreCase(tituloProcurado));
-        if(tituloAchado){
+        // Compara os Livros contidos no acervo com o tituloProcurado, ignorando maiúsculas e minúsculas
+        boolean tituloAchado = acervo.removeIf(l -> l.getTitulo().equalsIgnoreCase(tituloProcurado));
+
+        if (tituloAchado) {
             totalEmprestimos++;
-            salvarLivros(); //Atualiza o arquivo
+            salvarLivros(); // Atualiza o arquivo
             System.out.println("Total de empréstimos: " + totalEmprestimos);
             return true;
         }
 
-        return false; //não achou o Acervo.Livro
-
+        return false; // Não achou o Livro
     }
 
     /**
-     * Verifica se o titulo informado pelo usuário existe na lista,
-     * retornando true se encontrar e false se não encontrar
-     * @param inputTitulo input de titulo informado pelo usuário
-     * @return true se encontrar e false se não encontrar
-     * @version: 1.0
-     * @author: João Szczypior
+     * Verifica se o título informado pelo usuário já existe na lista do acervo.
+     * * @param inputTitulo O título informado pelo usuário.
+     * @return true se o livro for encontrado; false se não encontrar.
      */
-    private boolean verificaExiste(String inputTitulo){
-
+    private boolean verificaExiste(String inputTitulo) {
         for (Livro l : acervo) {
-            if(l.getTitulo().equalsIgnoreCase(inputTitulo))
-                return true; //Acervo.Livro já existe na lista
+            if (l.getTitulo().equalsIgnoreCase(inputTitulo)) {
+                return true; // Livro já existe na lista
+            }
         }
-        return false; //Acervo.Livro não existe na Lista
+        return false; // Livro não existe na Lista
     }
 
     /**
-     * Garante que o ARQUIVO_lIVROS tenha seu estado mantido no livros.txt
-     * @author: Andrey Marucci
+     * Sobrescreve o arquivo de texto com o estado atual da lista de livros.
      */
-    private void salvarLivros(){
-        try {
-            //Instanciando um escritor de arquivos e atribuindo ARQUIVO_LIVROS como alvo de escrita
-            try(PrintWriter escritor = new PrintWriter(ARQUIVO_lIVROS);){
-                for (Livro l : acervo) {
-                    escritor.println(l.getTitulo());
-                }
+    private void salvarLivros() {
+        try (PrintWriter escritor = new PrintWriter(ARQUIVO_LIVROS)) {
+            for (Livro l : acervo) {
+                escritor.println(l.getTitulo());
             }
-
         } catch (Exception e) {
             System.out.println("Erro salvando Acervo: " + e.getMessage());
         }
     }
 
     /**
-     * Le os títulos do arquivo os carregando na lista
-     * @author: Andrey Marucci
+     * Lê os títulos do arquivo de texto e os carrega na lista do acervo na memória.
      */
     private void carregarLivros() {
         try {
-            File f = new File(ARQUIVO_lIVROS);
+            File f = new File(ARQUIVO_LIVROS);
             if (f.exists()) {
                 Scanner fileSc = new Scanner(f);
                 while (fileSc.hasNextLine()) {
@@ -140,24 +114,24 @@ public class Biblioteca {
     }
 
     /**
-     * Demonstra todos os livros contidos no terminal
+     * Exibe todos os livros contidos no acervo diretamente no terminal.
      */
-    public void exibir(){
-        for(Livro livro : acervo){
+    public void exibir() {
+        for (Livro livro : acervo) {
             System.out.println(livro);
         }
     }
 
     /**
-     * Verifica se a lista esta vazia, retornando false se não
-     * @throws illegalStateException caso a lista esta vazia
-     * @return false se a lista não estiver vazia
+     * Verifica se a lista do acervo está vazia.
+     * Nota: O comportamento atual lança uma exceção em vez de retornar true.
+     * @return false se a lista contiver elementos.
+     * @throws IllegalStateException caso a lista não contenha nenhum livro.
      */
-    public boolean listaVazia (){
-        if(acervo.isEmpty()){
-            throw new IllegalStateException("Lista Está vazia, não há o que emprestar!");
+    public boolean listaVazia() {
+        if (acervo.isEmpty()) {
+            throw new IllegalStateException("Lista está vazia, não há o que emprestar!");
         }
         return false;
     }
-
 }
