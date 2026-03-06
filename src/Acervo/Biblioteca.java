@@ -27,7 +27,7 @@ public class Biblioteca {
 
     /**
      * Adiciona um novo livro à lista do acervo e atualiza o arquivo físico.
-     * * @param titulo O nome do livro inserido pelo usuário.
+     * @param titulo O nome do livro inserido pelo usuário.
      * @return true se o livro for adicionado com sucesso.
      * @throws IllegalArgumentException Se o título informado for nulo ou possuir menos de 3 caracteres.
      * @throws InputMismatchException   Se o título informado já existir no acervo atual.
