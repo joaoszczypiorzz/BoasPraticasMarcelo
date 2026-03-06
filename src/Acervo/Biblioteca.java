@@ -117,8 +117,12 @@ public class Biblioteca {
      * Exibe todos os livros contidos no acervo diretamente no terminal.
      */
     public void exibir() {
-        for (Livro livro : acervo) {
-            System.out.println(livro);
+        if(!listaVazia()){
+            for (Livro livro : acervo) {
+                System.out.println(livro);
+            }
+        } else {
+            System.out.println("Lista Vazia!");
         }
     }
 
@@ -130,7 +134,7 @@ public class Biblioteca {
      */
     public boolean listaVazia() {
         if (acervo.isEmpty()) {
-            throw new IllegalStateException("Lista está vazia, não há o que emprestar!");
+            throw new IllegalStateException("Lista está vazia, operação inválida!");
         }
         return false;
     }
