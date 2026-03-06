@@ -100,7 +100,11 @@ public class Menu  {
      * Utiliza o método listar da biblioteca para exibir todos os livros contidos em livros.txt.
      */
     private void menuListar() {
-        System.out.println("\n--- ACERVO ---");
-        biblioteca.exibir();
+        try{
+            System.out.println("\n--- ACERVO ---");
+            biblioteca.exibir();
+        }catch (IllegalStateException e){
+            System.out.println(e.getMessage());
+        }
     }
 }
