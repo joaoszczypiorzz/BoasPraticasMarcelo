@@ -10,7 +10,7 @@ import Menu.Menu;
  * aplicando boas práticas de engenharia de software, foco em código limpo e princípios
  * de orientação a objetos.
  * </p>
- * @author João Novaes, Andrey Marucci, João Szczypior, Enzo Schmidt, João Camargo e Rafael Vasconcelos
+ * @author João Novaes, Andrey Marucci, João Szczypior, Enzo Schmidt, João Camargo, Rafael Vasconcelos e Henrique Cavalari
  * @version 1.0
  */
 public class Main {
