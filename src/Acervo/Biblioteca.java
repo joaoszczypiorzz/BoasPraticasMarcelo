@@ -122,7 +122,7 @@ public class Biblioteca {
                 System.out.println(livro);
             }
         } else {
-            System.out.println("A lista está vazia!");
+            System.out.println("Lista Vazia!");
         }
 
     }
@@ -135,7 +135,7 @@ public class Biblioteca {
      */
     public boolean listaVazia() {
         if (acervo.isEmpty()) {
-            throw new IllegalStateException("Lista está vazia, operação não Válida!");
+            throw new IllegalStateException("Lista está vazia, operação inválida!");
         }
         return false;
     }

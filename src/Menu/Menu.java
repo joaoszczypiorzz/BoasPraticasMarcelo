@@ -61,7 +61,7 @@ public class Menu  {
         String titulo = scanner.nextLine();
 
         try {
-            biblioteca.adicionarLivro(titulo);
+            biblioteca.adicionarLivro(titulo.trim());
             System.out.println("SUCESSO: Livro '" + titulo + "' adicionado ao acervo.");
         } catch (IllegalArgumentException | InputMismatchException e) {
             System.out.println(e.getMessage());
@@ -84,7 +84,7 @@ public class Menu  {
                 String titulo = scanner.nextLine();
 
                 // Cria uma variavel que verifica se o livro digitado existe
-                boolean emprestou = biblioteca.emprestarLivro(titulo);
+                boolean emprestou = biblioteca.emprestarLivro(titulo.trim());
                 if (emprestou) {
                     System.out.println("Você emprestou o livro '" + titulo + "'.");
                 } else {
@@ -101,7 +101,6 @@ public class Menu  {
      */
     private void menuListar() {
         try{
-            System.out.println("\n--- ACERVO ---");
             biblioteca.exibir();
         }catch (IllegalStateException e){
             System.out.println(e.getMessage());
