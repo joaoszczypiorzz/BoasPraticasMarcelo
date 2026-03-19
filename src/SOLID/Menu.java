@@ -53,12 +53,16 @@ public class Menu {
                 }
                 break;
             case 3:
-                System.out.print("Título para empréstimo: ");
-                String busca = teclado.nextLine();
-                if (biblioteca.emprestarLivro(busca)) {
-                    System.out.println("Empréstimo realizado com sucesso!");
-                } else {
-                    System.out.println("Livro não encontrado no acervo.");
+                if(!biblioteca.getAcervo().isEmpty()){
+                    System.out.print("Título para empréstimo: ");
+                    String busca = teclado.nextLine();
+                    if (biblioteca.emprestarLivro(busca)) {
+                        System.out.println("Empréstimo realizado com sucesso!");
+                    } else {
+                        System.out.println("Livro não encontrado no acervo.");
+                    }
+                } else{
+                    System.out.println("Lista está vazia, Operação Inválida!");
                 }
                 break;
             case 0:
