@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2026-03-19">
-<meta name="description" content="declaration: package: Menu, class: Menu">
+<meta name="description" content="declaration: package: SOLID, class: Menu">
 <meta name="generator" content="javadoc/ClassWriter">
 <link rel="stylesheet" type="text/css" href="../resource-files/jquery-ui.min.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../resource-files/stylesheet.css" title="Style">
@@ -40,7 +40,7 @@ loadScripts(document, 'script');</script>
 <div class="sub-nav">
 <div class="nav-content">
 <ol class="sub-nav-list">
-<li><a href="package-summary.html">Menu</a></li>
+<li><a href="package-summary.html">SOLID</a></li>
 <li><a href="Menu.html" class="current-selection">Menu</a></li>
 </ol>
 <div class="nav-list-search">
@@ -67,20 +67,19 @@ loadScripts(document, 'script');</script>
 <li><a href="#field-detail" tabindex="0">Field Details</a>
 <ol class="toc-list">
 <li><a href="#biblioteca" tabindex="0">biblioteca</a></li>
-<li><a href="#scanner" tabindex="0">scanner</a></li>
+<li><a href="#teclado" tabindex="0">teclado</a></li>
 </ol>
 </li>
 <li><a href="#constructor-detail" tabindex="0">Constructor Details</a>
 <ol class="toc-list">
-<li><a href="#%3Cinit%3E(Acervo.Biblioteca)" tabindex="0">Menu(Biblioteca)</a></li>
+<li><a href="#%3Cinit%3E(SOLID.Biblioteca)" tabindex="0">Menu(Biblioteca)</a></li>
 </ol>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
 <li><a href="#iniciar()" tabindex="0">iniciar()</a></li>
-<li><a href="#menuAdicionar()" tabindex="0">menuAdicionar()</a></li>
-<li><a href="#menuEmprestar()" tabindex="0">menuEmprestar()</a></li>
-<li><a href="#menuListar()" tabindex="0">menuListar()</a></li>
+<li><a href="#exibirOpcoes()" tabindex="0">exibirOpcoes()</a></li>
+<li><a href="#processarOpcao(int)" tabindex="0">processarOpcao(int)</a></li>
 </ol>
 </li>
 </ol>
@@ -91,15 +90,13 @@ loadScripts(document, 'script');</script>
 <h1 title="Class Menu" class="title">Class Menu</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">Menu.Menu</div>
+<div class="inheritance">SOLID.Menu</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Menu</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Classe utilitária, contém as saídas de dados para o usuário e o Scanner,
- recebe a biblioteca e passa os valores para ela.</div>
 </div>
 </section>
 <section class="summary">
@@ -113,11 +110,11 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>private <a href="../Acervo/Biblioteca.html" title="class in Acervo">Biblioteca</a></code></div>
+<div class="col-first even-row-color"><code>private final <a href="Biblioteca.html" title="class in SOLID">Biblioteca</a></code></div>
 <div class="col-second even-row-color"><code><a href="#biblioteca" class="member-name-link">biblioteca</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>private <a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/Scanner.html" title="class or interface in java.util" class="external-link">Scanner</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#scanner" class="member-name-link">scanner</a></code></div>
+<div class="col-first odd-row-color"><code>private final <a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/Scanner.html" title="class or interface in java.util" class="external-link">Scanner</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#teclado" class="member-name-link">teclado</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 </div>
 </section>
@@ -130,10 +127,8 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(Acervo.Biblioteca)" class="member-name-link">Menu</a><wbr>(<a href="../Acervo/Biblioteca.html" title="class in Acervo">Biblioteca</a>&nbsp;biblioteca)</code></div>
-<div class="col-last even-row-color">
-<div class="block">Construtor padrão do Menu.</div>
-</div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(SOLID.Biblioteca)" class="member-name-link">Menu</a><wbr>(<a href="Biblioteca.html" title="class in SOLID">Biblioteca</a>&nbsp;biblioteca)</code></div>
+<div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -148,28 +143,15 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#iniciar()" class="member-name-link">iniciar</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Inicia o programa e o loop de interação com o usuário.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>private void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#menuAdicionar()" class="member-name-link">menuAdicionar</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Abre um menu para utilizar os metodos da biblioteca
- com o objetivo de adicionar um livro ao acervo.</div>
-</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>private void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#menuEmprestar()" class="member-name-link">menuEmprestar</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Abre um menu para utilizar métodos da biblioteca,
- com o objetivo de efetuar e confirmar o emprestimo de um livro.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>private void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#menuListar()" class="member-name-link">menuListar</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Utiliza o método listar da biblioteca para exibir todos os livros contidos em livros.txt.</div>
-</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#exibirOpcoes()" class="member-name-link">exibirOpcoes</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#iniciar()" class="member-name-link">iniciar</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>private void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#processarOpcao(int)" class="member-name-link">processarOpcao</a><wbr>(int&nbsp;opcao)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -191,15 +173,15 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="biblioteca">
 <h3>biblioteca</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="../Acervo/Biblioteca.html" title="class in Acervo">Biblioteca</a></span>&nbsp;<span class="element-name">biblioteca</span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="Biblioteca.html" title="class in SOLID">Biblioteca</a></span>&nbsp;<span class="element-name">biblioteca</span></div>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="scanner">
-<h3>scanner</h3>
+<section class="detail" id="teclado">
+<h3>teclado</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/Scanner.html" title="class or interface in java.util" class="external-link">Scanner</a></span>&nbsp;<span class="element-name">scanner</span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/Scanner.html" title="class or interface in java.util" class="external-link">Scanner</a></span>&nbsp;<span class="element-name">teclado</span></div>
 </div>
 </section>
 </li>
@@ -212,15 +194,10 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(Acervo.Biblioteca)">
+<section class="detail" id="&lt;init&gt;(SOLID.Biblioteca)">
 <h3>Menu</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Menu</span><wbr><span class="parameters">(<a href="../Acervo/Biblioteca.html" title="class in Acervo">Biblioteca</a>&nbsp;biblioteca)</span></div>
-<div class="block">Construtor padrão do Menu.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>biblioteca</code> - é a biblioteca que estamos usando</dd>
-</dl>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Menu</span><wbr><span class="parameters">(<a href="Biblioteca.html" title="class in SOLID">Biblioteca</a>&nbsp;biblioteca)</span></div>
 </div>
 </section>
 </li>
@@ -237,36 +214,22 @@ loadScripts(document, 'script');</script>
 <h3>iniciar</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">iniciar</span>()</div>
-<div class="block">Inicia o programa e o loop de interação com o usuário.</div>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="menuAdicionar()">
-<h3>menuAdicionar</h3>
+<section class="detail" id="exibirOpcoes()">
+<h3>exibirOpcoes</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">menuAdicionar</span>()</div>
-<div class="block">Abre um menu para utilizar os metodos da biblioteca
- com o objetivo de adicionar um livro ao acervo.</div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">exibirOpcoes</span>()</div>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="menuEmprestar()">
-<h3>menuEmprestar</h3>
+<section class="detail" id="processarOpcao(int)">
+<h3>processarOpcao</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">menuEmprestar</span>()</div>
-<div class="block">Abre um menu para utilizar métodos da biblioteca,
- com o objetivo de efetuar e confirmar o emprestimo de um livro.</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="menuListar()">
-<h3>menuListar</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">menuListar</span>()</div>
-<div class="block">Utiliza o método listar da biblioteca para exibir todos os livros contidos em livros.txt.</div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">processarOpcao</span><wbr><span class="parameters">(int&nbsp;opcao)</span></div>
 </div>
 </section>
 </li>

@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2026-03-19">
-<meta name="description" content="declaration: package: Acervo, class: Biblioteca">
+<meta name="description" content="declaration: package: SOLID, class: Biblioteca">
 <meta name="generator" content="javadoc/ClassWriter">
 <link rel="stylesheet" type="text/css" href="../resource-files/jquery-ui.min.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../resource-files/stylesheet.css" title="Style">
@@ -40,7 +40,7 @@ loadScripts(document, 'script');</script>
 <div class="sub-nav">
 <div class="nav-content">
 <ol class="sub-nav-list">
-<li><a href="package-summary.html">Acervo</a></li>
+<li><a href="package-summary.html">SOLID</a></li>
 <li><a href="Biblioteca.html" class="current-selection">Biblioteca</a></li>
 </ol>
 <div class="nav-list-search">
@@ -66,25 +66,23 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
 <li><a href="#field-detail" tabindex="0">Field Details</a>
 <ol class="toc-list">
-<li><a href="#totalEmprestimos" tabindex="0">totalEmprestimos</a></li>
 <li><a href="#acervo" tabindex="0">acervo</a></li>
-<li><a href="#ARQUIVO_LIVROS" tabindex="0">ARQUIVO_LIVROS</a></li>
+<li><a href="#repositorio" tabindex="0">repositorio</a></li>
+<li><a href="#totalEmprestimos" tabindex="0">totalEmprestimos</a></li>
 </ol>
 </li>
 <li><a href="#constructor-detail" tabindex="0">Constructor Details</a>
 <ol class="toc-list">
-<li><a href="#%3Cinit%3E()" tabindex="0">Biblioteca()</a></li>
+<li><a href="#%3Cinit%3E(SOLID.LivroRepositorio)" tabindex="0">Biblioteca(LivroRepositorio)</a></li>
 </ol>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
 <li><a href="#adicionarLivro(java.lang.String)" tabindex="0">adicionarLivro(String)</a></li>
 <li><a href="#emprestarLivro(java.lang.String)" tabindex="0">emprestarLivro(String)</a></li>
+<li><a href="#validarNovoLivro(java.lang.String)" tabindex="0">validarNovoLivro(String)</a></li>
 <li><a href="#verificaExiste(java.lang.String)" tabindex="0">verificaExiste(String)</a></li>
-<li><a href="#salvarLivros()" tabindex="0">salvarLivros()</a></li>
-<li><a href="#carregarLivros()" tabindex="0">carregarLivros()</a></li>
-<li><a href="#exibir()" tabindex="0">exibir()</a></li>
-<li><a href="#listaVazia()" tabindex="0">listaVazia()</a></li>
+<li><a href="#getAcervo()" tabindex="0">getAcervo()</a></li>
 </ol>
 </li>
 </ol>
@@ -95,15 +93,14 @@ loadScripts(document, 'script');</script>
 <h1 title="Class Biblioteca" class="title">Class Biblioteca</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">Acervo.Biblioteca</div>
+<div class="inheritance">SOLID.Biblioteca</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Biblioteca</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Gerencia o acervo de livros da aplicação, possibilitando a adição de novos títulos,
- controle de empréstimos e persistência de dados em arquivo de texto.</div>
+<div class="block">Gerencia o acervo de livros e as operações de empréstimo da biblioteca.</div>
 </div>
 </section>
 <section class="summary">
@@ -117,14 +114,12 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>private <a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="Livro.html" title="class in Acervo">Livro</a>&gt;</code></div>
+<div class="col-first even-row-color"><code>private final <a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="../Acervo/Livro.html" title="class in Acervo">Livro</a>&gt;</code></div>
 <div class="col-second even-row-color"><code><a href="#acervo" class="member-name-link">acervo</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>private static final <a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#ARQUIVO_LIVROS" class="member-name-link">ARQUIVO_LIVROS</a></code></div>
-<div class="col-last odd-row-color">
-<div class="block">Nome do arquivo onde o acervo será salvo e lido.</div>
-</div>
+<div class="col-first odd-row-color"><code>private final <a href="LivroRepositorio.html" title="interface in SOLID">LivroRepositorio</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#repositorio" class="member-name-link">repositorio</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>private int</code></div>
 <div class="col-second even-row-color"><code><a href="#totalEmprestimos" class="member-name-link">totalEmprestimos</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
@@ -139,9 +134,9 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">Biblioteca</a>()</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(SOLID.LivroRepositorio)" class="member-name-link">Biblioteca</a><wbr>(<a href="LivroRepositorio.html" title="interface in SOLID">LivroRepositorio</a>&nbsp;repositorio)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Construtor da Biblioteca.</div>
+<div class="block">Construtor da classe Biblioteca.</div>
 </div>
 </div>
 </section>
@@ -157,40 +152,30 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#adicionarLivro(java.lang.String)" class="member-name-link">adicionarLivro</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;titulo)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Adiciona um novo livro à lista do acervo e atualiza o arquivo físico.</div>
+<div class="block">Adiciona um novo livro ao acervo após validação.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#emprestarLivro(java.lang.String)" class="member-name-link">emprestarLivro</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tituloProcurado)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Realiza o empréstimo de um livro, removendo-o do acervo se encontrado</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="../Acervo/Livro.html" title="class in Acervo">Livro</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAcervo()" class="member-name-link">getAcervo</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Retorna uma visualização imutável do acervo atual.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>private void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#carregarLivros()" class="member-name-link">carregarLivros</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validarNovoLivro(java.lang.String)" class="member-name-link">validarNovoLivro</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;titulo)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Lê os títulos do arquivo de texto e os carrega na lista do acervo na memória.</div>
+<div class="block">Valida as regras de negócio para a inserção de um novo livro</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#emprestarLivro(java.lang.String)" class="member-name-link">emprestarLivro</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tituloProcurado)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#verificaExiste(java.lang.String)" class="member-name-link">verificaExiste</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;titulo)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Empresta um livro, removendo-o temporariamente do acervo</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#exibir()" class="member-name-link">exibir</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Exibe todos os livros contidos no acervo diretamente no terminal.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#listaVazia()" class="member-name-link">listaVazia</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Verifica se a lista do acervo está vazia.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>private void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#salvarLivros()" class="member-name-link">salvarLivros</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Sobrescreve o arquivo de texto com o estado atual da lista de livros.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>private boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#verificaExiste(java.lang.String)" class="member-name-link">verificaExiste</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;inputTitulo)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Verifica se o título informado pelo usuário já existe na lista do acervo</div>
+<div class="block">Verifica se um livro com o título informado já existe no acervo</div>
 </div>
 </div>
 </div>
@@ -210,35 +195,26 @@ loadScripts(document, 'script');</script>
 <h2>Field Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="acervo">
+<h3>acervo</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../Acervo/Livro.html" title="class in Acervo">Livro</a>&gt;</span>&nbsp;<span class="element-name">acervo</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="repositorio">
+<h3>repositorio</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="LivroRepositorio.html" title="interface in SOLID">LivroRepositorio</a></span>&nbsp;<span class="element-name">repositorio</span></div>
+</div>
+</section>
+</li>
+<li>
 <section class="detail" id="totalEmprestimos">
 <h3>totalEmprestimos</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">totalEmprestimos</span></div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="acervo">
-<h3>acervo</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Livro.html" title="class in Acervo">Livro</a>&gt;</span>&nbsp;<span class="element-name">acervo</span></div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="ARQUIVO_LIVROS">
-<h3>ARQUIVO_LIVROS</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">private static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">ARQUIVO_LIVROS</span></div>
-<div class="block">Nome do arquivo onde o acervo será salvo e lido.</div>
-<dl class="notes">
-<dt>See Also:</dt>
-<dd>
-<ul class="tag-list">
-<li><a href="../constant-values.html#Acervo.Biblioteca.ARQUIVO_LIVROS">Constant Field Values</a></li>
-</ul>
-</dd>
-</dl>
 </div>
 </section>
 </li>
@@ -251,12 +227,16 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;()">
+<section class="detail" id="&lt;init&gt;(SOLID.LivroRepositorio)">
 <h3>Biblioteca</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Biblioteca</span>()</div>
-<div class="block">Construtor da Biblioteca.
- Inicializa a lista do acervo e carrega automaticamente os livros salvos no arquivo físico.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Biblioteca</span><wbr><span class="parameters">(<a href="LivroRepositorio.html" title="interface in SOLID">LivroRepositorio</a>&nbsp;repositorio)</span></div>
+<div class="block">Construtor da classe Biblioteca.
+ Inicializa o acervo carregando os dados do repositório fornecido.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>repositorio</code> - O repositório de dados que será injetado.</dd>
+</dl>
 </div>
 </section>
 </li>
@@ -272,16 +252,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="adicionarLivro(java.lang.String)">
 <h3>adicionarLivro</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">adicionarLivro</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;titulo)</span></div>
-<div class="block">Adiciona um novo livro à lista do acervo e atualiza o arquivo físico.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">adicionarLivro</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;titulo)</span></div>
+<div class="block">Adiciona um novo livro ao acervo após validação.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>titulo</code> - O nome do livro inserido pelo usuário.</dd>
-<dt>Returns:</dt>
-<dd>true se o livro for adicionado com sucesso.</dd>
-<dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - Se o título informado for nulo ou possuir menos de 3 caracteres.</dd>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/InputMismatchException.html" title="class or interface in java.util" class="external-link">InputMismatchException</a></code> - Se o título informado já existir no acervo atual.</dd>
+<dd><code>titulo</code> - O título do livro a ser adicionado.</dd>
 </dl>
 </div>
 </section>
@@ -291,13 +266,28 @@ loadScripts(document, 'script');</script>
 <h3>emprestarLivro</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">emprestarLivro</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tituloProcurado)</span></div>
-<div class="block">Empresta um livro, removendo-o temporariamente do acervo.
- * @param tituloProcurado O título do livro a ser buscado no acervo.</div>
+<div class="block">Realiza o empréstimo de um livro, removendo-o do acervo se encontrado.
+ * @param tituloProcurado O título do livro para empréstimo.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>true se o livro for encontrado e removido; false caso contrário.</dd>
+<dd>true se o livro foi encontrado e removido, false caso contrário.</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link">IllegalStateException</a></code> - se a lista do acervo estiver vazia antes da busca.</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link">IllegalStateException</a></code> - se o acervo estiver vazio.</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="validarNovoLivro(java.lang.String)">
+<h3>validarNovoLivro</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">validarNovoLivro</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;titulo)</span></div>
+<div class="block">Valida as regras de negócio para a inserção de um novo livro.
+ * @param titulo O título a ser validado.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - se o título for nulo ou menor que 3 caracteres.</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/RuntimeException.html" title="class or interface in java.lang" class="external-link">RuntimeException</a></code> - se o livro já existir no acervo.</dd>
 </dl>
 </div>
 </section>
@@ -306,55 +296,25 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="verificaExiste(java.lang.String)">
 <h3>verificaExiste</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">verificaExiste</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;inputTitulo)</span></div>
-<div class="block">Verifica se o título informado pelo usuário já existe na lista do acervo.
- * @param inputTitulo O título informado pelo usuário.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">verificaExiste</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;titulo)</span></div>
+<div class="block">Verifica se um livro com o título informado já existe no acervo.
+ * @param titulo O título para busca.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>true se o livro for encontrado; false se não encontrar.</dd>
+<dd>true se o livro existir, false caso contrário.</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="salvarLivros()">
-<h3>salvarLivros</h3>
+<section class="detail" id="getAcervo()">
+<h3>getAcervo</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">salvarLivros</span>()</div>
-<div class="block">Sobrescreve o arquivo de texto com o estado atual da lista de livros.</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="carregarLivros()">
-<h3>carregarLivros</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">carregarLivros</span>()</div>
-<div class="block">Lê os títulos do arquivo de texto e os carrega na lista do acervo na memória.</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="exibir()">
-<h3>exibir</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">exibir</span>()</div>
-<div class="block">Exibe todos os livros contidos no acervo diretamente no terminal.</div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="listaVazia()">
-<h3>listaVazia</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">listaVazia</span>()</div>
-<div class="block">Verifica se a lista do acervo está vazia.
- Nota: O comportamento atual lança uma exceção em vez de retornar true.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../Acervo/Livro.html" title="class in Acervo">Livro</a>&gt;</span>&nbsp;<span class="element-name">getAcervo</span>()</div>
+<div class="block">Retorna uma visualização imutável do acervo atual.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>false se a lista contiver elementos.</dd>
-<dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link">IllegalStateException</a></code> - caso a lista não contenha nenhum livro.</dd>
+<dd>Uma lista de livros que não permite modificação direta.</dd>
 </dl>
 </div>
 </section>
