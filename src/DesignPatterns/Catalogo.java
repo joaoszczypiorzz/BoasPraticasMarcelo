@@ -1,94 +1,79 @@
 package DesignPatterns;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /**
- * Classe genérica responsável pelo gerenciamento de uma coleção de produtos.
- * Utiliza Generics para permitir a manipulação de qualquer tipo de objeto que estenda a classe {@link Produto}.
- *
- * @param <T> Tipo do produto gerenciado pelo catálogo.
- * @author Joao Vitor Novaes
- * @version 1.0
+ * Catalogo transformado em Singleton para gerenciar a lista única de produtos.
  */
 public class Catalogo<T extends Produto> {
 
-    /**
-     * Lista interna que armazena os produtos do catálogo.
-     */
+    // 1. A instância única (estática)
+    // Usamos o tipo base 'Produto' para permitir misturar os itens da sua lista
+    private static Catalogo<Produto> instancia;
+
     private List<T> lista;
 
-    /**
-     * Construtor padrão da classe Catalogo.
-     * Inicializa a lista de produtos como um ArrayList vazio.
-     */
-    public Catalogo() {
+    // 2. Construtor PRIVADO
+    // Agora ele inicializa a lista com os dados que você forneceu
+    private Catalogo() {
         this.lista = new ArrayList<>();
+        popularDadosIniciais(); // Método auxiliar para carregar sua lista
     }
 
-    /**
-     * Adiciona um novo produto ao catálogo.
-     *
-     * @param produto O objeto produto a ser adicionado à lista.
-     */
+    // 3. Método para obter a instância única
+    public static synchronized Catalogo<Produto> getInstance() {
+        if (instancia == null) {
+            instancia = new Catalogo<>();
+        }
+        return instancia;
+    }
+
+    // Método para popular a lista conforme sua solicitação
+    @SuppressWarnings("unchecked")
+    private void popularDadosIniciais() {
+        List<Produto> iniciais = Arrays.asList(
+                new ProdutoEletronico("E001", "Notebook Gamer", 5000.00, 24),
+                new ProdutoEletronico("E002", "Smartphone X", 2500.00, 12),
+                new ProdutoAlimenticio("A001", "Arroz 5kg", 25.90, "31/12/2025"),
+                new ProdutoAlimenticio("A002", "Leite 1L", 4.50, "15/01/2025")
+                // ... adicione os outros aqui
+        );
+        // Adicionamos todos à nossa lista interna
+        this.lista.addAll((List<T>) iniciais);
+    }
+
     public void adicionar(T produto) {
         lista.add(produto);
     }
 
     /**
-     * Remove um produto do catálogo com base no seu código único.
-     * Busca o produto e, caso encontrado, remove-o da lista.
-     *
-     * @param codigo O código do produto a ser removido.
-     * @throws IllegalArgumentException Caso o produto não seja encontrado na lista.
-     */
-    public void removerPorCodigo(String codigo) {
-        if (verificadorCodigo(codigo)) {
-            System.out.print("Removido em instantes! " + buscarPorCodigo(codigo));
-            // Utiliza stream para localizar e remover o objeto específico
-            lista.remove(lista.stream()
-                    .filter(p -> p.getCodigo().equalsIgnoreCase(codigo))
-                    .findFirst()
-                    .get());
-            System.out.println("Produto removido com sucesso!");
-        } else {
-            throw new IllegalArgumentException("Produto não encontrado!");
-        }
-    }
-
-    /**
-     * Busca um produto no catálogo pelo seu código.
-     *
-     * @param codigo O código identificador do produto.
-     * @return O objeto produto correspondente ao código informado.
-     * @throws IllegalArgumentException Caso nenhum produto com o código informado seja encontrado.
+     * Versão Melhorada: Usando Optional para evitar erros de busca
      */
     public T buscarPorCodigo(String codigo) {
-        if (!verificadorCodigo(codigo)) {
-            throw new IllegalArgumentException("Produto não encontrado!");
-        }
-        System.out.println("Produto encontrado! ");
         return lista.stream()
                 .filter(p -> p.getCodigo().equalsIgnoreCase(codigo))
                 .findFirst()
-                .get();
+                .orElseThrow(() -> new IllegalArgumentException("Produto " + codigo + " não encontrado!"));
     }
 
-    /**
-     * Verifica se existe algum produto cadastrado com o código fornecido.
-     *
-     * @param codigo O código a ser verificado.
-     * @return true se o código existir no catálogo, false caso contrário.
-     */
+    public void removerPorCodigo(String codigo) {
+        T produto = buscarPorCodigo(codigo); // Se não achar, já lança a exceção do método acima
+        lista.remove(produto);
+        System.out.println("Produto " + codigo + " removido com sucesso!");
+    }
+
     public boolean verificadorCodigo(String codigo) {
         return lista.stream().anyMatch(p -> p.getCodigo().equalsIgnoreCase(codigo));
     }
 
-    /**
-     * Exibe no console todos os produtos atualmente cadastrados no catálogo.
-     * Utiliza o método toString() de cada produto para a impressão.
-     */
     public void listarProdutos() {
-        lista.forEach(System.out::println);
+        if (lista.isEmpty()) {
+            System.out.println("O catálogo está vazio.");
+        } else {
+            lista.forEach(System.out::println);
+        }
     }
 }
