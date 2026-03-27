@@ -1,4 +1,5 @@
 package DesignPatterns;
 
-public class EstrategiaDesconto {
+public interface EstrategiaDesconto {
+    double aplicar(double precoOriginal, double percentual);
 }
